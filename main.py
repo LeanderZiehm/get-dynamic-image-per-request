@@ -50,4 +50,11 @@ def get_time_image():
     img.save(buffer, format="PNG")
     buffer.seek(0)
 
-    return Response(content=buffer.getvalue(), media_type="image/png")
+    # Add headers to prevent caching
+    headers = {
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+        "Pragma": "no-cache",
+        "Expires": "0",
+    }
+
+    return Response(content=buffer.getvalue(), media_type="image/png", headers=headers)
