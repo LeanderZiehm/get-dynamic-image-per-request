@@ -36,7 +36,8 @@ def get_time_image(response: Response, db: Session = Depends(get_db)):
     # Create an image
     img = Image.new("RGB", (500, 120), color=(25, 25, 25))
     draw = ImageDraw.Draw(img)
-    font = ImageFont.load_default()
+    font_size = 32
+    font = ImageFont.load_default(font_size=font_size)
 
     time_text = f"Time: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}"
     views_text = f"Views: {count}"
